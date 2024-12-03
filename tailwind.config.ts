@@ -1,6 +1,5 @@
-import type { Config } from "tailwindcss";
-
 export default {
+  darkMode: "class", // Add dark mode support
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,10 +8,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: {
+          light: "var(--background-light)",
+          dark: "var(--background-dark)",
+        },
+        foreground: {
+          light: "var(--foreground-light)",
+          dark: "var(--foreground-dark)",
+        },
       },
     },
   },
   plugins: [],
-} satisfies Config;
+};
