@@ -1,6 +1,6 @@
 "use client";
 import { Calendar as CalendarIcon } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { DateRangePicker, Range, RangeKeyDict } from "react-date-range";
 
 import "react-date-range/dist/styles.css";
@@ -28,23 +28,6 @@ const Calendar = () => {
 
   const [selectedTimeframe, setSelectedTimeframe] =
     useState<string>("Custom Range");
-
-  // Dark mode toggle effect
-  useEffect(() => {
-    // Check for saved theme preference or system preference
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDarkMode = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-
-    if (savedTheme) {
-      setIsDarkMode(savedTheme === "dark");
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
-    } else if (prefersDarkMode) {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
 
   const handleDateRangeChange = (item: RangeKeyDict) => {
     const updatedDateRange = [item.selection];
@@ -102,10 +85,8 @@ const Calendar = () => {
     const newTheme = !isDarkMode;
     setIsDarkMode(newTheme);
 
-    // Update local storage
     localStorage.setItem("theme", newTheme ? "dark" : "light");
 
-    // Toggle dark class on html element
     document.documentElement.classList.toggle("dark", newTheme);
   };
 
@@ -113,7 +94,6 @@ const Calendar = () => {
 
   return (
     <div className="relative bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
-      {/* Date Range Display */}
       <div className="flex justify-end mb-4 space-x-4">
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -143,7 +123,6 @@ const Calendar = () => {
         </select>
       </div>
 
-      {/* Date Range Picker */}
       <div className="bg-gray-100 dark:bg-gray-700 rounded-md">
         <DateRangePicker
           direction="horizontal"
@@ -157,7 +136,6 @@ const Calendar = () => {
         />
       </div>
 
-      {/* Apply/Cancel Buttons */}
       {selectedTimeframe === "Custom Range" && (
         <div className="flex justify-end mt-4 space-x-2">
           <button className="bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-md px-4 py-2 hover:bg-gray-300 dark:hover:bg-gray-500">

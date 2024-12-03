@@ -6,7 +6,6 @@ const ThemeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    // Check for saved theme preference or system preference
     const savedTheme = localStorage.getItem("theme");
     const prefersDarkMode = window.matchMedia(
       "(prefers-color-scheme: dark)"
@@ -25,10 +24,8 @@ const ThemeToggle = () => {
     const newTheme = !isDarkMode;
     setIsDarkMode(newTheme);
 
-    // Update local storage
     localStorage.setItem("theme", newTheme ? "dark" : "light");
 
-    // Toggle dark class on html element
     document.documentElement.classList.toggle("dark", newTheme);
   };
 
